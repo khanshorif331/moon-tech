@@ -6,7 +6,7 @@ const ProductProvider = ({ children }) => {
 	const [data, setData] = useState([])
 
 	useEffect(() => {
-		fetch('https://fakestoreapi.com/products')
+		fetch('https://moontech-server.vercel.app/')
 			.then(res => res.json())
 			.then(data => setData(data.data))
 	}, [])
