@@ -4,16 +4,27 @@ import { useProducts } from '../context/ProductProvider'
 
 const Home = () => {
 	const {
-		state: { products },
+		state: { products, loading, error },
 	} = useProducts()
-	console.log(products)
+
+	let content
+
+	if (loading) {
+		content = <div>Loading...</div>
+	}
+
+	if (error) {
+		content = <div>Something went wrong</div>
+	}
+	if (!loading && !error && products.length === 0) {
+		content = products.map(product => {
+			return <ProductCard product={product} key={product._id}></ProductCard>
+		})
+	}
+
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl gap-14 mx-auto my-10">
-			{products.map(product => {
-				return (
-					<ProductCard product={product} key={product._id}></ProductCard>
-				)
-			})}
+			{content}
 		</div>
 	)
 }
