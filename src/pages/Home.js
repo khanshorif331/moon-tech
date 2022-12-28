@@ -18,6 +18,11 @@ const Home = () => {
 	}
 	if (!loading && !error && products.length === 0) {
 		content = products.map(product => {
+			return <p>Nothing to show.Product list is empty.</p>
+		})
+	}
+	if (!loading && !error && products.length) {
+		content = products.map(product => {
 			return <ProductCard product={product} key={product._id}></ProductCard>
 		})
 	}
