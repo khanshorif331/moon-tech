@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
-const PRODUCT__CONTEXT = createContext()
+const PRODUCT_CONTEXT = createContext()
 
 const ProductProvider = ({ children }) => {
 	const [data, setData] = useState([])
 
 	useEffect(() => {
-		fetch('https://moontech-server.vercel.app/')
+		fetch('https://moontech-server.vercel.app/products')
 			.then(res => res.json())
 			.then(data => setData(data.data))
 	}, [])
@@ -14,7 +15,16 @@ const ProductProvider = ({ children }) => {
 	const value = {
 		data,
 	}
-	return <PRODUCT__CONTEXT provider={value}>{children}</PRODUCT__CONTEXT>
+	return (
+		<PRODUCT_CONTEXT.Provider value={value}>
+			{children}
+		</PRODUCT_CONTEXT.Provider>
+	)
+}
+
+export const useProducts = () => {
+	const context = useContext(PRODUCT_CONTEXT)
+	return context
 }
 
 export default ProductProvider
