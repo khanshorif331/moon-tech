@@ -1,4 +1,4 @@
-## Technologies Used:
+## Technologies Used:-
 * React 
 * UseReducer hook
 * Context api
