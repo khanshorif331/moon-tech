@@ -1,4 +1,4 @@
-## Technologies Used:
+## Technologies Used:--
 * React 
 * Javascript
 * UseReducer hook
